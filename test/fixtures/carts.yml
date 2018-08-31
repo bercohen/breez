@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  subtotal: 1
+  status: 1
+  products_qty: 1
+  customer: one
+
+two:
+  subtotal: 1
+  status: 1
+  products_qty: 1
+  customer: two
