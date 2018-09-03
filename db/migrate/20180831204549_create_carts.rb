@@ -3,7 +3,7 @@ class CreateCarts < ActiveRecord::Migration[5.0]
     create_table :carts do |t|
       t.integer :subtotal
       t.integer :status
-      t.integer :products_qty
+      t.integer :products_qty, default: 0
       t.references :customer, foreign_key: true
 
       t.timestamps

@@ -15,10 +15,10 @@ ActiveRecord::Schema.define(version: 20180831204603) do
   create_table "carts", force: :cascade do |t|
     t.integer  "subtotal"
     t.integer  "status"
-    t.integer  "products_qty"
+    t.integer  "products_qty", default: 0
     t.integer  "customer_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.index ["customer_id"], name: "index_carts_on_customer_id"
   end
 
@@ -45,9 +45,10 @@ ActiveRecord::Schema.define(version: 20180831204603) do
   create_table "line_items", force: :cascade do |t|
     t.integer  "cart_id"
     t.integer  "product_id"
-    t.integer  "qty"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "qty",        default: 0
+    t.integer  "0",          default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.index ["cart_id"], name: "index_line_items_on_cart_id"
     t.index ["product_id"], name: "index_line_items_on_product_id"
   end
@@ -55,11 +56,11 @@ ActiveRecord::Schema.define(version: 20180831204603) do
   create_table "orders", force: :cascade do |t|
     t.integer  "total"
     t.integer  "tax"
-    t.integer  "status"
+    t.integer  "status",      default: 0
     t.integer  "customer_id"
     t.integer  "cart_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.index ["cart_id"], name: "index_orders_on_cart_id"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
   end

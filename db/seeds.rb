@@ -5,3 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+3.times do
+  Customer.create([{ first_name: Faker::Name.first_name,
+    last_name:Faker::Name.last_name,
+    email:Faker::Internet.email}])
+end
+
+20.times do
+  Product.create([{name: Faker::Commerce.product_name,
+     description:Faker::GreekPhilosophers.quote , price: Faker::Commerce.price * 100, qty:50}])
+end

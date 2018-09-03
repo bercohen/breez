@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Orders</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Order ID</th>
+      <th scope="col">Total</th>
+      <th scope="col">Cart Subtotal</th>
+      <th scope="col">Cart Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders.each do |order| %>
+    <tr>
+      <td><%=  order.id %></td>
+      <td><%=  order.total %></td>
+      <td><%=  order.cart.subtotal %></td>
+      <td><%=  order.cart.status %></td>
+    </tr>
+    <!-- <td><%= link_to 'Show', order %></td>
+    <td><%= link_to 'Edit', edit_order_path(order) %></td>
+    <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+    <% end %>
+  </tbody>
+</table>
+
+<br>
