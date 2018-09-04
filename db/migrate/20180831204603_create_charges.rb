@@ -6,7 +6,7 @@ class CreateCharges < ActiveRecord::Migration[5.0]
       t.string :currency
       t.boolean :refunded
       t.references :order, foreign_key: true
-      t.boolean :disputed
+      t.boolean :disputed, default: false
 
       t.timestamps
     end

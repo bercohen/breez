@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th scope="col">Order ID</th>
+      <th scope="col">Customer</th>
       <th scope="col">Total</th>
       <th scope="col">Items</th>
       <th scope="col">Cart Subtotal</th>
@@ -17,15 +18,20 @@
     <% @orders.each do |order| %>
     <tr>
       <td><%= order.id %></td>
-      <td><%= order.total_after_tax %></td>
+      <%if order.customer.present? %>
+        <td><%= order.customer.first_name %> <%=order.customer.last_name %></td>
+      <% else %>
+        <td></td>
+      <% end %>
+      <td>$<%= order.total_after_tax / 100%></td>
       <td><%= order.cart.products_qty %></td>
-      <td><%= order.cart.subtotal %></td>
-      <% if order.cart.status == 'created' %>
-         <td><%= link_to order.cart.status, cart_path(order.cart), class: "badge badge-warning"%></td>
-      <%elsif order.cart.paid %>
+      <td>$<%= order.cart.subtotal / 100 %></td>
+      <% if order.pending %>
+         <td><%= link_to "Pending", cart_path(order.cart), class: "badge badge-warning"%></td>
+      <%elsif order.cart.paid && !order.disputed %>
         <td><%= link_to order.cart.status, cart_path(order.cart), class: "badge badge-success"%></td>
-      <%elsif order.cart.status == 'abandoned' %>
-        <td><%= link_to order.cart.status, order, class: "badge badge-danger"%></td>
+      <%elsif order.disputed %>
+        <td><%= link_to "disputed", order, class: "badge badge-danger"%></td>
       <% end %>
       <% if !order.cart.paid %>
         <td><%= button_to "Pay", {controller:'charge', action: "create", amount: order.total_after_tax ,order_id: order.id}, method: :post, class: "btn btn-success"%></td>

@@ -10,7 +10,7 @@ class Order < ApplicationRecord
   after_save :set_cart_status
 
   private def set_cart_status
-    self.cart.update(status: self.status) if self.status == "paid"
+    self.cart.update(status: self.status) if paid
   end
 
   private def create_tax
@@ -25,5 +25,12 @@ class Order < ApplicationRecord
     self.status == "paid"
   end
 
+  def pending
+    paid? ? false : true
+  end
+
+  def disputed
+    Charge.find_by_order_id(self.id).disputed
+  end
 
 end

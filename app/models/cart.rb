@@ -23,8 +23,12 @@ class Cart < ApplicationRecord
 
   private def paid_total
     order = Order.find_by_cart_id(self.id)
-    total = Charge.find_by_order_id(order.id).amount - order.tax
-    return total
+    charge = Charge.find_by_order_id(order.id)
+    if charge.present?
+      return total = charge.amount - order.tax
+    else
+      return self.line_items.map {|item| item.total_price}.sum
+    end
   end
 
   # private def keep_paid_qty
