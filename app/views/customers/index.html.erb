@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Customers</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @customers.each do |customer| %>
+    <tr>
+      <td><%=  customer.first_name %></td>
+      <td><%=  customer.last_name %></td>
+      <td><%=  customer.email %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

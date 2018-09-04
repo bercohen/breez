@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Products</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Price</th>
+      <th scope="col">Quantity</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+    <tr>
+      <td><%=  product.name %></td>
+      <td><%=  product.description %></td>
+      <td>$<%=  product.price / 100.00 %></td>
+      <td><%=  product.qty %></td>
+      <td><%= link_to 'Edit', edit_product_path(product) %></td>
+      <td><%= button_to "Add to Cart", {controller:'line_items', action: "add_to_cart", product_id: product.id}, method: :post, class: "btn btn-primary"%></td>
+
+      <!-- <td><button type="button" class="btn btn-primary">Add to cart</button></td> -->
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
