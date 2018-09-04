@@ -61,12 +61,3 @@ Cart.where(customer_id: first_customer.id)[0..1].each_with_index do |cart, i|
     charge = Charge.create(paid: true, order_id: order.id, amount: order.total_after_tax) if i == 0
     charge = Charge.create(disputed: true, paid: true, order_id: order.id, amount: order.total_after_tax) if i == 1
 end
-
-
-
-# last_cart = Cart.where(customer_id: third_customer.id)[5]
-
-
-
-
-# Order.create([{}])

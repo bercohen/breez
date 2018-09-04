@@ -4,7 +4,6 @@ class CartsController < ApplicationController
   before_action :check_for_empty
 
   def show
-    # redirect_to orders if @cart.empty_cart
   end
 
   def remove_item
@@ -37,9 +36,5 @@ class CartsController < ApplicationController
   def set_cart
     @cart = Cart.find(params[:id])
   end
-
-  # def cart_params
-  #   params.fetch(:cart, {}).permit(:id, :item_id)
-  # end
 
 end

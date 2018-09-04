@@ -1,5 +1,6 @@
 class LineItemsController < ApplicationController
 
+  # method to add items to cart  
   def add_to_cart
     cart_id = params[:cart_id]
     if cart_id.present?
@@ -21,13 +22,4 @@ class LineItemsController < ApplicationController
     redirect_to cart
   end
 
-  private
-
-  # def set_line_item
-  #   @line_item = LineItem.find(params[:id])
-  # end
-
-  # def product_id
-  #   params.fetch(:id)
-  # end
 end

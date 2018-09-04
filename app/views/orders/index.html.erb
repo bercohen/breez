@@ -23,9 +23,9 @@
       <% else %>
         <td></td>
       <% end %>
-      <td>$<%= order.total_after_tax / 100%></td>
+      <td>$<%= order.total_after_tax / 100.00%></td>
       <td><%= order.cart.products_qty %></td>
-      <td>$<%= order.cart.subtotal / 100 %></td>
+      <td>$<%= order.cart.subtotal / 100.00 %></td>
       <% if order.pending %>
          <td><%= link_to "Pending", cart_path(order.cart), class: "badge badge-warning"%></td>
       <%elsif order.cart.paid && !order.disputed %>
@@ -38,11 +38,7 @@
       <% else %>
         <td></td>
       <% end %>
-
     </tr>
-    <!-- <td><%= link_to 'Show', order %></td>
-    <td><%= link_to 'Edit', edit_order_path(order) %></td>
-    <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
     <% end %>
   </tbody>
 </table>

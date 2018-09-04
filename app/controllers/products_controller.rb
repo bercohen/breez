@@ -24,13 +24,12 @@ class ProductsController < ApplicationController
     end
   end
 
-
   private
     def set_product
       @product = Product.find(params[:id])
     end
 
     def product_params
-      params.fetch(:product, {}).permit(:price)
+      params.permit(:price)
     end
 end

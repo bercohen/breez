@@ -5,8 +5,6 @@ class Cart < ApplicationRecord
   belongs_to :customer, required: false
   has_many :line_items
 
-  # before_update :prevent_update_if_paid?
-  # before_save :keep_paid_qty
   after_find :set_subtotal, :set_quantity
 
   private def set_subtotal
@@ -31,22 +29,6 @@ class Cart < ApplicationRecord
     end
   end
 
-  # private def keep_paid_qty
-  #   if paid
-  #     self.products_qty = self.products_qty
-  #   end
-  # end
-
-  # private def delete_empty
-  #   if self.subtotal == 0
-  #     self.destroy
-  #   end
-  # end
-
-  # def tax
-  #   self.subtotal / 10
-  # end
-
   def ordered?
     Order.where(cart_id: self.id).present?
   end
@@ -63,6 +45,7 @@ class Cart < ApplicationRecord
     self.status == "paid"
   end
 
+  # method to find current cart. TO DO: create user authentication to track carts
   def self.current_cart
     open_carts = []
     all.each do |cart|
