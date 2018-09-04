@@ -4,7 +4,7 @@ The environment I used to create this site used:
 
 * Ruby version 2.3.1
 
-* Rails ruby 5.0.6
+* Rails version 5.0.6
 
 * I linked to Bootstrap 4.1.3 CDN in the layouts/application.html.erb
 
