@@ -30,6 +30,6 @@ class ProductsController < ApplicationController
     end
 
     def product_params
-      params.permit(:price)
+      params.fetch(:product, {}).permit(:price)
     end
 end
