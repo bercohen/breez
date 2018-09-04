@@ -19,6 +19,7 @@
       <td><%=  product.description %></td>
       <td><%=  product.price %></td>
       <td><%=  product.qty %></td>
+      <td><%= link_to 'Edit', edit_product_path(product) %></td>
       <td><%= button_to "Add to Cart", {controller:'line_items', action: "add_to_cart", product_id: product.id}, method: :post, class: "btn btn-primary"%></td>
 
       <!-- <td><button type="button" class="btn btn-primary">Add to cart</button></td> -->

@@ -9,7 +9,7 @@
       <th scope="col">Description</th>
       <th scope="col">Quantity</th>
       <th scope="col">Price</th>
-
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -19,12 +19,17 @@
       <td><%=  item.product.description %></td>
       <td><%=  item.qty %></td>
       <td><%=  item.total_price%></td>
-      <td><%= button_to "Remove", {controller:'carts', action: "remove_item", item_id: item.id}, method: :post, class: "btn btn-danger btn-sm"%></td>
+
+        <td><%= button_to "Remove", {controller:'carts', action: "remove_item", id: @cart.id, item_id: item.id}, method: :post, class: "btn btn-danger btn-sm"%>
+         <%= button_to "Add", {controller:'line_items', action: "add_to_cart",cart_id: @cart.id, product_id: item.product_id}, method: :post, class: "btn btn-info btn-sm"%></td>
+
     </tr>
     <% end %>
   </tbody>
 </table>
-<h2>Total: <span> <%=@cart.subtotal%></span></h2>
-<%= button_to "Place Order", {controller:'carts', action: "place_order", id: @cart.id}, method: :post, class: "btn btn-success btn-lg float-right"%>
+
+  <h2>Total: <span> <%=@cart.subtotal%></span></h2>
+  <%= button_to "Place Order", {controller:'carts', action: "place_order", id: @cart.id}, method: :post, class: "btn btn-success btn-lg float-right"%>
+
 
 <br>

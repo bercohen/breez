@@ -7,17 +7,32 @@
     <tr>
       <th scope="col">Order ID</th>
       <th scope="col">Total</th>
+      <th scope="col">Items</th>
       <th scope="col">Cart Subtotal</th>
       <th scope="col">Cart Status</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
     <% @orders.each do |order| %>
     <tr>
-      <td><%=  order.id %></td>
-      <td><%=  order.total %></td>
-      <td><%=  order.cart.subtotal %></td>
-      <td><%=  order.cart.status %></td>
+      <td><%= order.id %></td>
+      <td><%= order.total_after_tax %></td>
+      <td><%= order.cart.products_qty %></td>
+      <td><%= order.cart.subtotal %></td>
+      <% if order.cart.status == 'created' %>
+         <td><%= link_to order.cart.status, cart_path(order.cart), class: "badge badge-warning"%></td>
+      <%elsif order.cart.paid %>
+        <td><%= link_to order.cart.status, cart_path(order.cart), class: "badge badge-success"%></td>
+      <%elsif order.cart.status == 'abandoned' %>
+        <td><%= link_to order.cart.status, order, class: "badge badge-danger"%></td>
+      <% end %>
+      <% if !order.cart.paid %>
+        <td><%= button_to "Pay", {controller:'charge', action: "create", amount: order.total_after_tax ,order_id: order.id}, method: :post, class: "btn btn-success"%></td>
+      <% else %>
+        <td></td>
+      <% end %>
+
     </tr>
     <!-- <td><%= link_to 'Show', order %></td>
     <td><%= link_to 'Edit', edit_order_path(order) %></td>

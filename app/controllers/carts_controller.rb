@@ -1,24 +1,35 @@
 class CartsController < ApplicationController
 
-  before_action :set_cart, only: [:show, :place_order]
+  before_action :set_cart, only: [:show, :place_order, :remove_item, :check_for_empty]
+  before_action :check_for_empty
 
   def show
+    # redirect_to orders if @cart.empty_cart
   end
 
   def remove_item
     item = LineItem.find(params[:item_id])
-    if item.qty > 1
-      item.decrement!(:qty)
+    product = Product.find(item.product.id)
+    item.remove
+    product.out_of_cart
+    if @cart.empty_cart
+      redirect_to orders_path
     else
-      item.destroy
+      redirect_to :back
     end
-    Product.find(item.product.id).out_of_cart
-    redirect_to :back
   end
 
   def place_order
-    Order.create(cart_id: params[:id], status: :created, total: @cart.subtotal)
+    if !@cart.ordered?
+      Order.create(cart_id: params[:id], status: :created, total: @cart.subtotal)
+    else
+      @cart.update(subtotal: @cart.subtotal, products_qty:@cart.subtotal)
+    end
     redirect_to orders_url
+  end
+
+  def check_for_empty
+    redirect_to orders_path if @cart.empty_cart
   end
 
   private

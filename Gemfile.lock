@@ -40,6 +40,7 @@ GEM
       tzinfo (~> 1.1)
     arel (7.1.4)
     bindex (0.5.0)
+    bootstrap_form (2.7.0)
     builder (3.2.3)
     byebug (10.0.2)
     coffee-rails (4.2.2)
@@ -161,6 +162,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootstrap_form
   byebug
   coffee-rails (~> 4.2)
   faker (~> 1.9, >= 1.9.1)

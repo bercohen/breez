@@ -1,0 +1,9 @@
+<%= bootstrap_form_for(@product) do |f| %>
+  <div class="form-group">
+     <%f.label :price, 'price' %>
+     <div class="input-group">
+       <%= f.text_field :price, icon: "usd" %>
+     </div>
+   </div>
+  <%= f.submit "Update", class:"btn btn-success" %>
+<% end %>

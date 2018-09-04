@@ -1,7 +1,7 @@
 class CreateCharges < ActiveRecord::Migration[5.0]
   def change
     create_table :charges do |t|
-      t.boolean :paid
+      t.boolean :paid, default: true
       t.integer :amount
       t.string :currency
       t.boolean :refunded

@@ -5,16 +5,25 @@ class Order < ApplicationRecord
   belongs_to :customer, required: false
   belongs_to :cart, required: true
 
-  # after_create do
-  #   Cart.create
-  # end
+  # before_update :prevent_update_if_paid?
+  before_create :create_tax
+  after_save :set_cart_status
 
-  # before_validation :succesful
-  # before_validation :pending
-  # before_validation :disputed
-  #
-  # private def succesful
-  #   status == 'paid' || status == 'shipped' || status == ''
-  # end
+  private def set_cart_status
+    self.cart.update(status: self.status) if self.status == "paid"
+  end
+
+  private def create_tax
+    self.tax = self.cart.subtotal / 10
+  end
+
+  def total_after_tax
+    self.cart.subtotal + self.tax
+  end
+
+  def paid
+    self.status == "paid"
+  end
+
 
 end
