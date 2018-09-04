@@ -17,3 +17,9 @@ The application allows you to:
 * Update the quantity of items in an order so long as the order is not paid
 
 * edit items prices so long as they are not in a cart
+
+For the specs I approached 2 similar tasks in 2 different ways:
+
+* To maintain the price once a product was added to a cart, I created a new `fixed_price` field to **LineItem** to keep the price once the product was added to a cart.
+
+* To keep the subtotal once a cart was paid for I created a `paid_total` method to access the amount of the subtotal at the time of the Charge. I didn't like this solution as much, especially do to the complications of the tax paid.
