@@ -12,7 +12,7 @@ class CartsController < ApplicationController
     item.remove
     product.out_of_cart
     if @cart.empty_cart
-      redirect_to orders_path
+      redirect_to products_path
     else
       redirect_to :back
     end
@@ -28,7 +28,7 @@ class CartsController < ApplicationController
   end
 
   def check_for_empty
-    redirect_to orders_path if @cart.empty_cart
+    redirect_to products_path if @cart.empty_cart
   end
 
   private
