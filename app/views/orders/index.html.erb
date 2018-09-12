@@ -29,9 +29,9 @@
       <% if order.pending %>
          <td><%= link_to "Pending", cart_path(order.cart), class: "badge badge-warning"%></td>
       <%elsif order.cart.paid && !order.disputed %>
-        <td><span class="badge badge-success"><%=order.cart.status%></span></td>
+        <td><span class="badge badge-success">Paid</span></td>
       <%elsif order.disputed %>
-        <td><span class="badge badge-danger">"Disputed"</span></td>
+        <td><span class="badge badge-danger">Disputed</span></td>
       <% end %>
       <% if !order.cart.paid %>
         <td><%= button_to "Pay", {controller:'charge', action: "create", amount: order.total_after_tax ,order_id: order.id}, method: :post, class: "btn btn-success"%></td>
