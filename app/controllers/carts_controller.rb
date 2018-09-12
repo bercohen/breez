@@ -2,6 +2,8 @@ class CartsController < ApplicationController
 
   before_action :set_cart, only: [:show, :place_order, :remove_item, :check_for_empty]
   before_action :check_for_empty
+  before_action :check_for_pending
+
 
   def show
   end
@@ -29,6 +31,12 @@ class CartsController < ApplicationController
 
   def check_for_empty
     redirect_to products_path if @cart.empty_cart
+  end
+
+  def check_for_pending
+    if @cart.paid
+      redirect_to orders_path
+    end
   end
 
   private
